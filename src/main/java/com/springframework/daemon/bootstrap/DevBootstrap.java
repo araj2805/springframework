@@ -2,8 +2,10 @@ package com.springframework.daemon.bootstrap;
 
 import com.springframework.daemon.model.Author;
 import com.springframework.daemon.model.Book;
+import com.springframework.daemon.model.Publisher;
 import com.springframework.daemon.repositories.AuthorRepository;
 import com.springframework.daemon.repositories.BookRepository;
+import com.springframework.daemon.repositories.PublisherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
@@ -17,6 +19,8 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     private AuthorRepository authorRepository;
     @Autowired
     private BookRepository bookRepository;
+    @Autowired
+    private PublisherRepository publisherRepository;
 
     private void initdata()
     {
@@ -24,9 +28,14 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         author1.setFirstname("Ankit");
         author1.setLastname("Raj");
 
+        Publisher publisher =new Publisher();
+        publisher.setAddress("Patna");
+        publisher.setName("Penguin");
+        publisherRepository.save(publisher);
+
         Book book = new Book();
         book.setIsbn("1234");
-        book.setPublisher("Penguin");
+        book.setPublisher(publisher);
         book.setTitle("Way o life");
 
         author1.getBooks().add(book);
@@ -40,9 +49,15 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         author2.setFirstname("Aman");
         author2.setLastname("Raj");
 
+        Publisher publisher1 = new Publisher();
+        publisher1.setName("NCRET");
+        publisher1.setAddress("Delhi");
+
+        publisherRepository.save(publisher1);
+
         Book book1 = new Book();
         book1.setIsbn("5678");
-        book1.setPublisher("NCRET");
+        book1.setPublisher(publisher1);
         book1.setTitle("Science and World");
 
         author2.getBooks().add(book1);
