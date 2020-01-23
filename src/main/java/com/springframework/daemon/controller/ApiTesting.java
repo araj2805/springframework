@@ -9,7 +9,7 @@ public class ApiTesting {
     @GetMapping("/greet")
     public ResponseEntity<String> testing() throws Exception
     {
-        String a = "Hi Java, i am Ankit Raj";
+        String a = "Hi Java, i am Ankit Raj and bibhu";
         return ResponseEntity.ok(a);
 
     }
